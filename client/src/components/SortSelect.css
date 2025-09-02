@@ -1,0 +1,24 @@
+.sort-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sort-select label {
+  font-weight: bold;
+}
+
+.sort-select select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .sort-select {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
