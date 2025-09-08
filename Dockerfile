@@ -1,23 +1,18 @@
-FROM node:18-alpine
+FROM node:18
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
+COPY . .
 
-COPY client/package*.json ./client/
-COPY server/package*.json ./server/
+WORKDIR /usr/src/app/client
 
-
-RUN cd client && npm install && chmod -R 755 node_modules/.bin/
-RUN cd server && npm install && chmod -R 755 node_modules/.bin/
-
-
-COPY client/ ./client/
-COPY server/ ./server/
+RUN npm i
+RUN npm run build
 
 
-RUN chmod -R 755 /app/client/node_modules/.bin/
-RUN chmod -R 755 /app/server/node_modules/.bin/
+WORKDIR /usr/src/app/server
+RUN npm i
 
-EXPOSE 3000 5000
+EXPOSE 5000
 
-CMD ["sh", "-c", "cd server && npm run dev & cd client && npm run dev && fg"]
+CMD ["node", "server.js"]
