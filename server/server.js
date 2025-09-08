@@ -11,6 +11,11 @@ const productRoutes = require('./routes/products')
 const orderRoutes = require('./routes/orders')
 
 const app = express()
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json())
 
