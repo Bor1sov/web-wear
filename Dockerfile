@@ -1,11 +1,19 @@
-FROM node:18 
+FROM node:18-alpine
 
-WORKDIR /usr/src/app
 
-COPY . .
+WORKDIR /app
 
-RUN npm i
 
-EXPOSE 3000
+COPY client/package*.json ./client/
+COPY server/package*.json ./server/
 
-CMD ["npm", "dev"]
+RUN cd client && npm install
+RUN cd server && npm install
+
+COPY client/ ./client/
+COPY server/ ./server/
+
+
+EXPOSE 3000 5000
+
+CMD ["sh", "-c", "cd client && npm run dev & cd server && npm run dev"]
